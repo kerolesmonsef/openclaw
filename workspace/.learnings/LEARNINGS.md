@@ -1,45 +1,26 @@
-# Learnings
+## [LRN-260301-001] skill existence validation
 
-Corrections, insights, and knowledge gaps captured during development.
-
-**Categories**: correction | insight | knowledge_gap | best_practice
-**Areas**: frontend | backend | infra | tests | docs | config
-**Statuses**: pending | in_progress | resolved | wont_fix | promoted | promoted_to_skill
-
-## Status Definitions
-
-| Status | Meaning |
-|--------|---------|
-| `pending` | Not yet addressed |
-| `in_progress` | Actively being worked on |
-| `resolved` | Issue fixed or knowledge integrated |
-| `wont_fix` | Decided not to address (reason in Resolution) |
-| `promoted` | Elevated to CLAUDE.md, AGENTS.md, or copilot-instructions.md |
-| `promoted_to_skill` | Extracted as a reusable skill |
-
-## Skill Extraction Fields
-
-When a learning is promoted to a skill, add these fields:
-
-```markdown
-**Status**: promoted_to_skill
-**Skill-Path**: skills/skill-name
-```
-
-Example:
-```markdown
-## [LRN-20250115-001] best_practice
-
-**Logged**: 2025-01-15T10:00:00Z
-**Priority**: high
-**Status**: promoted_to_skill
-**Skill-Path**: skills/docker-m1-fixes
-**Area**: infra
+**Logged**: 2026-03-01T23:59:00Z
+**Priority**: medium
+**Status**: pending
+**Area**: tools
 
 ### Summary
-Docker build fails on Apple Silicon due to platform mismatch
-...
-```
+Before executing commands on skill directories, validate that the skill actually exists
+
+### Details
+User requested to list files in egx-news logs multiple times, but the egx-news skill doesn't exist in the workspace. The command executed successfully but returned no output, indicating the directory was empty/non-existent.
+
+### Suggested Action
+Implement a validation step that checks if a skill directory exists before attempting to list its contents or execute commands within it.
+
+### Metadata
+- Source: user_feedback
+- Related Files: ~/.openclaw/workspace/skills/
+- Tags: validation, error_prevention
+- Pattern-Key: validate.skill_existence
+- Recurrence-Count: 2 (this is the second occurrence)
+- First-Seen: 2026-03-01
+- Last-Seen: 2026-03-01
 
 ---
-
