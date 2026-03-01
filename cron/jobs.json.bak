@@ -8,7 +8,7 @@
       "enabled": true,
       "deleteAfterRun": true,
       "createdAtMs": 1772297235881,
-      "updatedAtMs": 1772399903574,
+      "updatedAtMs": 1772401700767,
       "schedule": {
         "kind": "every",
         "everyMs": 1800000,
@@ -26,14 +26,14 @@
         "bestEffort": false
       },
       "state": {
-        "nextRunAtMs": 1772401699462,
-        "lastRunAtMs": 1772399899462,
-        "lastRunStatus": "ok",
-        "lastStatus": "ok",
-        "lastDurationMs": 4112,
-        "lastDelivered": true,
-        "lastDeliveryStatus": "delivered",
-        "consecutiveErrors": 0
+        "nextRunAtMs": 1772403499470,
+        "lastRunAtMs": 1772401699470,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 1297,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1,
+        "lastError": "No delivery target resolved for channel \"telegram\". Set delivery.to."
       }
     },
     {
