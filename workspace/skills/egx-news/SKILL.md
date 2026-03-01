@@ -24,18 +24,22 @@ metadata: {"clawdbot":{"emoji":"🇪🇬","requires":{"bins":["uv"],"env":[]}}}
 uv run {baseDir}/scripts/fetch_news.py
 uv run {baseDir}/scripts/fetch_news.py --days 7
 uv run {baseDir}/scripts/fetch_news.py --symbol CIB
+uv run {baseDir}/scripts/fetch_news.py --live    # جلب أخبار حية من Google News RSS
+uv run {baseDir}/scripts/fetch_news.py --raw     # جلب الأخبار الخام للـ LLM
 ```
 **المخرجات:** JSON بالأخبار الموثوقة فقط
 
 ### 2. التقرير اليومي
 ```bash
 uv run {baseDir}/scripts/daily_report.py
+uv run {baseDir}/scripts/daily_report.py --no-send   # إنشاء التقرير بدون إرسال Telegram
 ```
 **المخرجات:** تقرير markdown + ملخص JSON + إرسال Telegram
 
 ### 3. التقرير الأسبوعي
 ```bash
 uv run {baseDir}/scripts/weekly_report.py
+uv run {baseDir}/scripts/weekly_report.py --no-send  # إنشاء التقرير بدون إرسال Telegram
 ```
 **المخرجات:** تقرير شامل markdown + ملخص JSON + إرسال Telegram
 
@@ -43,6 +47,16 @@ uv run {baseDir}/scripts/weekly_report.py
 ```bash
 uv run {baseDir}/scripts/send_telegram.py "الرسالة هنا"
 uv run {baseDir}/scripts/send_telegram.py --file /path/to/report.md "ملخص"
+uv run {baseDir}/scripts/send_telegram.py --file /path/to/report.md --summarize        # تلخيص تلقائي (regex)
+uv run {baseDir}/scripts/send_telegram.py --file /path/to/report.md --summarize-llm    # تلخيص بالذكاء الاصطناعي (LLM)
+uv run {baseDir}/scripts/send_telegram.py --file /path/to/report.md --summarize-llm --provider chatanywhere
+```
+
+### 5. خدمة التلخيص بالذكاء الاصطناعي (LLM)
+```bash
+uv run {baseDir}/scripts/llm_service.py "نص للتلخيص"
+uv run {baseDir}/scripts/llm_service.py --file /path/to/report.md
+uv run {baseDir}/scripts/llm_service.py --file /path/to/report.md --provider chatanywhere --max-length 200
 ```
 
 ---
@@ -126,5 +140,6 @@ uv run {baseDir}/scripts/send_telegram.py --file /path/to/report.md "ملخص"
 2. **JSON output** - كل الـ scripts تطبع JSON للـ Agent
 3. **لا إزعاج** - فقط الأخبار المهمة تستحق إشعار فوري
 4. **طويل الأجل فقط** - تجاهل أي خبر مضاربي أو قصير الأجل
+5. **التلخيص الذكي** - تدعم التقارير إمكانية التلخيص بواسطة (LLM)
 ```
 

@@ -8,7 +8,6 @@ agents/main/sessions/*
 
 # Logs, outputs, and runtime state
 logs/
-memory/
 media/
 subagents/runs.json
 update-check.json

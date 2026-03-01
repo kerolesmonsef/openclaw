@@ -39,14 +39,12 @@ DB_PATH = None
 config = None
 
 def load_config():
-    """تحميل الإعدادات"""
     global config, DB_PATH
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         config = json.load(f)
     DB_PATH = config["database"]["path"]
 
 def init_db():
-    """إنشاء قاعدة البيانات"""
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -72,20 +70,16 @@ def is_source_trusted(source):
     
     source_lower = source.lower()
     
-    # تحقق من القائمة السوداء
     if any(bad in source_lower for bad in blacklist):
         return False
     
-    # تحقق من المحللين المفضلين
     if source in preferred:
         return True
     
-    # تحقق من قائمة المصادر الموثوقة الجديدة
     for trusted in trusted_sources:
         if trusted.lower() in source_lower or source_lower in trusted.lower():
             return True
     
-    # مصادر إضافية معروفة
     known_sources = ["investing", "cnbc", "mubasher", "faros", "hc", "morgan", 
                      "bloomberg", "reuters", "الأهرام", "المال", "مباشر"]
     if any(src in source_lower for src in known_sources):
@@ -94,22 +88,19 @@ def is_source_trusted(source):
     return False
 
 def has_long_term_keywords(text):
-    """التحقق من وجود كلمات طويل الأجل"""
     keywords = config["filters"]["long_term_keywords"]
     text_lower = text.lower()
     return any(keyword in text_lower for keyword in keywords)
 
 def pe_ratio_ok(pe):
-    """التحقق من مكرر الربحية"""
+    if pe is None:
+        return True
     if pe is None:
         return True
     return pe <= config["filters"]["pe_ratio_max"]
 
 def double_check_news(title, content, source, pe_ratio):
-    """
-    Double-Check للخبر
-    يرجع: (passed, reason)
-    """
+
     # 1. المصدر موثوق؟
     if not is_source_trusted(source):
         return False, f"مصدر غير موثوق: {source}"
@@ -189,13 +180,7 @@ def get_news_from_db(days=1, symbol=None):
 # ============================================
 
 def fetch_raw_news_from_google():
-    """
-    جلب الأخبار الخام من Google News RSS
-    مجاني 100% - لا يحتاج API
-    
-    Returns:
-        dict with 'raw_xml', 'parsed_items', 'source_url'
-    """
+
     import requests
     
     # كلمات البحث للبورصة المصرية
@@ -214,7 +199,7 @@ def fetch_raw_news_from_google():
             # Google News RSS URL
             encoded_query = quote(query)
             url = f"https://news.google.com/rss/search?q={encoded_query}&hl=ar&gl=EG&ceid=EG:ar"
-            
+            print(f"Fetching news for url: {url}")
             headers = {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
@@ -358,47 +343,7 @@ def detect_symbol(text):
     
     return ''
 
-def fetch_sample_news():
-    """
-    جلب أخبار تجريبية (يمكن استبدالها بـ web scraping حقيقي)
-    """
-    # TODO: استبدال بـ web scraping حقيقي من المصادر
-    sample_news = [
-        {
-            "title": "CIB يحقق أرباحاً قياسية في الربع الرابع",
-            "content": "البنك التجاري الدولي سجل صافي أرباح 5 مليار جنيه متجاوزاً التوقعات، المحللون يرون نمواً طويل الأجل.",
-            "source": "HC",
-            "symbol": "CIB",
-            "pe_ratio": 9.5
-        },
-        {
-            "title": "تراجع أسعار الذهب مع قوة الدولار",
-            "content": "الذهب ينخفض 2% اليوم، لكن التوقعات إيجابية للمستثمرين طويلي الأجل. فرصة للاستثمار.",
-            "source": "CNBC Arabic",
-            "symbol": "GOLD",
-            "pe_ratio": None
-        },
-        {
-            "title": "توصية من Morgan Stanley بزيادة الوزن النسبي للأسهم المصرية",
-            "content": "البنك يرى أن السوق ما زال رخيصاً وينصح بشراء CIB وEGX30. استثمار طويل الأجل.",
-            "source": "Morgan Stanley",
-            "symbol": "EGX30",
-            "pe_ratio": 9.0
-        },
-        {
-            "title": "شائعات على تويتر عن ارتفاع CIB",
-            "content": "مصادر مجهولة تتوقع ارتفاع السهم 50% الأسبوع القادم!",
-            "source": "twitter.com",
-            "symbol": "CIB",
-            "pe_ratio": None
-        }
-    ]
-    return sample_news
-
 def process_news(raw_news):
-    """
-    معالجة الأخبار مع Double-Check
-    """
     results = {
         "processed": 0,
         "passed": 0,
@@ -473,17 +418,12 @@ def main():
         "symbol": args.symbol
     }
     
-    # جلب أخبار جديدة
-    if args.live:
-        # 🟢 جلب من Google News RSS (مجاني)
-        raw_result = fetch_raw_news_from_google()
-        raw_news = convert_raw_to_news(raw_result['parsed_items'])
-        output["source"] = "Google News RSS (Live)"
-        output["fetched_count"] = raw_result['count']
-    else:
-        # البيانات التجريبية
-        raw_news = fetch_sample_news()
-        output["source"] = "Sample Data"
+    # 🟢 جلب من Google News RSS (مجاني)
+    raw_result = fetch_raw_news_from_google()
+    raw_news = convert_raw_to_news(raw_result['parsed_items'])
+    output["source"] = "Google News RSS (Live)"
+    output["fetched_count"] = raw_result['count']
+
     
     process_results = process_news(raw_news)
     output["fetch_results"] = process_results
