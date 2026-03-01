@@ -1,0 +1,44 @@
+# Default OpenClaw Gitignore
+agents/main/sessions/*
+!agents/main/sessions/sessions.json
+
+# Backups
+*.bak
+*.bak.*
+
+# Logs, outputs, and runtime state
+logs/
+memory/
+media/
+subagents/runs.json
+update-check.json
+exec-approvals.json
+cron/runs/
+
+# Credentials, Identity and Device Status (Private data)
+credentials/
+identity/device*.json
+devices/paired.json
+devices/pending.json
+telegram/update-offset*.json
+
+# Workspace dynamic data and logs
+workspace/logs/
+workspace/memory/[0-9]*.md
+workspace/reports/
+workspace/skills/*/reports/
+*.db
+*.sqlite
+workspace/.clawhub/lock.json
+workspace/.openclaw/workspace-state.json
+
+# Caches and general gitignore
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+.env
+.venv
+venv/
+node_modules/

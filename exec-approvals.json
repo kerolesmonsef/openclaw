@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "socket": {
-    "path": "/home/kero/.openclaw/exec-approvals.sock",
-    "token": "AuFdyiCLlWOLI9M3NnUpKUV_pTHqcqBc"
-  },
-  "defaults": {},
-  "agents": {}
-}
