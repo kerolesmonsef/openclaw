@@ -1,0 +1,25 @@
+2026-02-28 19:08:02,755 - INFO - === بدء المهمة اليومية ===
+2026-02-28 19:08:02,784 - INFO - Database initialized.
+2026-02-28 19:08:02,784 - INFO - Fetching news from sources...
+2026-02-28 19:08:02,790 - INFO - News stored: CIB يحقق أرباحاً قياسية في الربع الرابع...
+2026-02-28 19:08:02,790 - INFO - Source not trusted: CNBC Arabic
+2026-02-28 19:08:02,790 - INFO - News did not pass double-check: تراجع أسعار الذهب مع قوة الدولار
+2026-02-28 19:08:02,791 - INFO - No long-term keywords found.
+2026-02-28 19:08:02,791 - INFO - News did not pass double-check: توصية من Morgan Stanley بزيادة الوزن النسبي للأسهم المصرية
+2026-02-28 19:08:02,791 - INFO - News fetching completed.
+2026-02-28 19:08:02,791 - INFO - === انتهاء المهمة اليومية ===
+2026-02-28 19:08:18,295 - INFO - === بدء المهمة اليومية ===
+2026-02-28 19:08:18,296 - INFO - Database initialized.
+2026-02-28 19:08:18,296 - INFO - Fetching news from sources...
+2026-02-28 19:08:18,305 - INFO - News stored: CIB يحقق أرباحاً قياسية في الربع الرابع...
+2026-02-28 19:08:18,305 - INFO - Source not trusted: CNBC Arabic
+2026-02-28 19:08:18,305 - INFO - News did not pass double-check: تراجع أسعار الذهب مع قوة الدولار
+2026-02-28 19:08:18,305 - INFO - No long-term keywords found.
+2026-02-28 19:08:18,305 - INFO - News did not pass double-check: توصية من Morgan Stanley بزيادة الوزن النسبي للأسهم المصرية
+2026-02-28 19:08:18,305 - INFO - News fetching completed.
+2026-02-28 19:08:18,305 - INFO - === انتهاء المهمة اليومية ===
+2026-02-28 19:19:24,328 - INFO - Fetching news from sources...
+2026-02-28 19:19:24,851 - INFO - Telegram message sent.
+2026-02-28 19:19:25,294 - INFO - التقرير اليومي file sent.
+2026-02-28 19:20:23,115 - INFO - Telegram message sent.
+2026-02-28 19:20:23,615 - INFO - التقرير الأسبوعي file sent.

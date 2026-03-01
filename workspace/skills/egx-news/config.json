@@ -1,0 +1,101 @@
+{
+  "llm": {
+    "default_provider": "openrouter",
+    "providers": {
+      "openrouter": {
+        "name": "OpenRouter",
+        "api_url": "https://openrouter.ai/api/v1",
+        "api_key": "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",
+        "default_model": "arcee-ai/trinity-large-preview:free",
+        "models": [
+          "anthropic/claude-3.5-sonnet",
+          "openai/gpt-4-turbo",
+          "google/gemini-pro",
+          "meta-llama/llama-3.3-70b-instruct:free",
+          "arcee-ai/trinity-large-preview:free",
+          "tngtech/deepseek-r1t2-chimera:free"
+        ]
+      },
+      "chatanywhere": {
+        "name": "ChatAnywhere",
+        "api_url": "https://api.chatanywhere.tech/v1",
+        "api_key": "sk-5YtP1G5qONbRrPSnM26ZKF8jnc8TMO3rYYO7Rt6KpKCV41V1",
+        "default_model": "gpt-4o-ca",
+        "models": [
+          "gpt-4o-ca",
+          "gpt-4o-mini-ca",
+          "deepseek-v3",
+          "deepseek-r1",
+          "gpt-5-ca"
+        ]
+      }
+    },
+    "summarize": {
+      "max_tokens": 500,
+      "temperature": 0.3,
+      "system_prompt": "أنت مساعد متخصص في تلخيص أخبار البورصة المصرية. قم بتلخيص الأخبار بشكل موجز ومفيد للمستثمر. استخدم العربية الفصحى."
+    }
+  },
+  "investor": {
+    "name": "Kero",
+    "strategy": "طويل الأجل في البورصة المصرية",
+    "monthly_amount": 2000,
+    "start_date": "2026-02-28",
+    "time_horizon_years": 5
+  },
+  "preferences": {
+    "sectors": {
+      "banks": ["CIB", "QNBA", "ALEX"],
+      "gold": ["Gold ETFS", "physical gold"],
+      "indices": ["EGX30", "EGX100"]
+    },
+    "news_sources": [
+      "https://www.investing.com/equities/egypt",
+      "https://www.cnbcarabia.com",
+      "https://www.mubasher.info",
+      "https://www.faros.com"
+    ],
+    "preferred_analysts": ["Morgan Stanley", "HC", "Faros"],
+    "trusted_news_sources": [
+      "الأهرام", "بوابة الأهرام", "اليوم السابع", "المصري اليوم",
+      "جريدة المال", "البورصة", "معلومات مباشر", "مباشر",
+      "اقتصاد الشرق", "بلومبرغ", "Bloomberg", "Reuters", "رويترز",
+      "CNBC", "CNBC عربية", "cnbc", "investing", "Investing",
+      "البوابة نيوز", "الوطن", "الشروق", "الدستور",
+      "مصراوي", "القاهرة 24", "أموال الغد", "الأهرام ويكلي"
+    ],
+    "blacklist_sources": ["twitter.com", "facebook.com", "t.me"],
+    "alert_priority": {
+      "high": ["تغيير توصية", "حدث اقتصادي كبير", "Morgan Stanley", "صعود", "مكاسب قياسية"],
+      "medium": ["أرباح فصلية", "فرصة استثمار جديدة", "الاستحواذ", "المشتقات"],
+      "low": ["سعر مناسب للشراء"]
+    }
+  },
+  "filters": {
+    "pe_ratio_max": 15,
+    "require_long_term_keywords": false,
+    "long_term_keywords": ["طويل الأجل", "استثمار", "نمو", "أساسيات قوية", "احتفاظ", "عوائد", "توزيعات", "البورصة", "EGX", "سهم", "أسهم", "مؤشر"]
+  },
+  "alerts": {
+    "immediate_triggers": [
+      "تغيير توصية",
+      "أرباح غير متوقعة",
+      "حدث اقتصادي كبير",
+      "فرصة جديدة"
+    ],
+    "weekly_schedule": "Saturday"
+  },
+  "telegram": {
+    "bot_token": "8680626744:AAEfMsJb-RHlkNOSju9w8ZsursBJzh2BSsY",
+    "chat_id": "5147345838"
+  },
+  "database": {
+    "path": "/home/kero/.openclaw/skills/egx-news/stock_data.db"
+  },
+  "reports": {
+    "path": "/home/kero/.openclaw/skills/egx-news/reports"
+  },
+  "logs": {
+    "path": "/home/kero/.openclaw/skills/egx-news/logs"
+  }
+}

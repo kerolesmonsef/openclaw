@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "0420c8ec-d1bd-45dc-8cc1-fd31c9147e07",
+      "agentId": "main",
+      "name": "testMemory",
+      "enabled": true,
+      "deleteAfterRun": true,
+      "createdAtMs": 1772297235881,
+      "updatedAtMs": 1772399903574,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 1800000,
+        "anchorMs": 1772297344734
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "just send hello message on telegram"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last",
+        "bestEffort": false
+      },
+      "state": {
+        "nextRunAtMs": 1772401699462,
+        "lastRunAtMs": 1772399899462,
+        "lastRunStatus": "ok",
+        "lastStatus": "ok",
+        "lastDurationMs": 4112,
+        "lastDelivered": true,
+        "lastDeliveryStatus": "delivered",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "egx-daily-report",
+      "agentId": "main",
+      "name": "egyptStocksDaily",
+      "enabled": false,
+      "createdAtMs": 1772315600000,
+      "schedule": {
+        "kind": "cron",
+        "cron": "0 7 * * *"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "شغل skill egx-news واعملي تقرير يومي. استخدم الأمر: uv run ~/.openclaw/skills/egx-news/scripts/daily_report.py\n\nلو في أخبار high priority ابعتها فوراً على Telegram. لو مفيش جديد مهم، ابعت ملخص قصير بس. تأكد من تطبيق Double-Check على كل خبر."
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "bestEffort": true
+      },
+      "state": {
+        "scheduleErrorCount": 3,
+        "lastError": "schedule error: Error: invalid cron schedule: expr is required"
+      }
+    },
+    {
+      "id": "egx-weekly-report",
+      "agentId": "main",
+      "name": "egyptStocksWeekly",
+      "enabled": false,
+      "createdAtMs": 1772315600000,
+      "schedule": {
+        "kind": "cron",
+        "cron": "0 9 * * 6"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "شغل skill egx-news واعملي تقرير أسبوعي شامل. استخدم الأمر: uv run ~/.openclaw/skills/egx-news/scripts/weekly_report.py\n\nالتقرير يشمل: ملخص السوق، أهم الأخبار، حالة CIB والذهب وEGX30، إحصائيات الأسبوع، التوزيع المقترح للاستثمار الشهري (2000 جنيه)."
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "telegram",
+        "bestEffort": true
+      },
+      "state": {
+        "scheduleErrorCount": 3,
+        "lastError": "schedule error: Error: invalid cron schedule: expr is required"
+      }
+    }
+  ]
+}
